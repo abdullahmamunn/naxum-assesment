@@ -1,0 +1,28 @@
+separate distributor
+SELECT users.id, user_category.user_id, users.username, COUNT(orders.id) AS total_sale 
+FROM orders LEFT JOIN users ON orders.purchaser_id=users.id 
+LEFT JOIN users on user_category.user_id=users.id
+where user_category.category_id = 1;
+
+
+group by username
+
+SELECT users.id, users.username, COUNT(orders.id) AS total_sale 
+FROM orders LEFT JOIN users ON orders.purchaser_id=users.id 
+GROUP BY users.username
+
+by distributor
+SELECT users.id, users.username, COUNT(orders.id) AS total_sale 
+FROM orders LEFT JOIN users ON orders.purchaser_id=users.id 
+            LEFT JOIN user_category ON users.id=user_category.user_id 
+            WHERE user_category.category_id = 1
+GROUP BY users.username
+
+by limit
+
+SELECT users.id, users.username, COUNT(orders.id) AS total_sale 
+FROM orders LEFT JOIN users ON orders.purchaser_id=users.id 
+            LEFT JOIN user_category ON users.id=user_category.user_id 
+            WHERE user_category.category_id = 1
+          
+GROUP BY users.username ORDER BY total_sale DESC LIMIT 100;
