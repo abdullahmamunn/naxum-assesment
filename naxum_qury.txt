@@ -26,3 +26,13 @@ FROM orders LEFT JOIN users ON orders.purchaser_id=users.id
             WHERE user_category.category_id = 1
           
 GROUP BY users.username ORDER BY total_sale DESC LIMIT 100;
+
+
+16 nov
+SELECT users.id, users.username, COUNT(order_items.order_id) AS total_sale 
+FROM orders  JOIN users ON orders.purchaser_id=users.id 
+             JOIN order_items ON orders.id=order_items.order_id 
+             JOIN user_category ON users.id=user_category.user_id 
+             WHERE user_category.category_id = 1
+          
+GROUP BY users.username ORDER BY total_sale DESC;
